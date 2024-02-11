@@ -2,6 +2,6 @@
 ^\.Rproj\.user$
 ^src/Makevars$
 ^\.github$
-^configure.log$
+^.*\.log
 ^README.md$
 ^LICENSE\.md$

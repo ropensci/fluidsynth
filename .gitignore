@@ -7,3 +7,7 @@ src/*.dll
 src/Makevars
 windows
 configure.log
+*.log
+*.wav
+*.mp3
+

@@ -6,13 +6,23 @@
 #'
 #' @useDynLib miditools C_midi_play
 #' @export
-#' @rdname midi
+#' @rdname miditools
 #' @param midi path to the midi file
 #' @param soundfont path to the soundfont
 midi_play <- function(midi = demo_midi(), soundfont = general_user_gs()){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
-  .Call(C_midi_play, midi, soundfont)
+  .Call(C_midi_play, midi, soundfont, NULL)
+}
+
+#' @rdname miditools
+#' @export
+#' @rdname output filename of the output. It is recommended to use wav output.
+midi_convert <- function(midi = demo_midi(), soundfont = general_user_gs(), output = 'output.wav'){
+  midi <- normalizePath(midi, mustWork = TRUE)
+  soundfont <- normalizePath(soundfont, mustWork = TRUE)
+  output <- normalizePath(output, mustWork = FALSE)
+  .Call(C_midi_play, midi, soundfont, output)
 }
 
 general_user_gs <- function(){

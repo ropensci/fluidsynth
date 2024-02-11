@@ -2,9 +2,16 @@
 % Please edit documentation in R/midi.R
 \name{midi_play}
 \alias{midi_play}
+\alias{midi_convert}
 \title{Play a midi file}
 \usage{
 midi_play(midi = demo_midi(), soundfont = general_user_gs())
+
+midi_convert(
+  midi = demo_midi(),
+  soundfont = general_user_gs(),
+  output = "output.wav"
+)
 }
 \arguments{
 \item{midi}{path to the midi file}
