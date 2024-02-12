@@ -5,7 +5,7 @@
 \alias{midi_convert}
 \title{Play a midi file}
 \usage{
-midi_play(midi = demo_midi(), soundfont = general_user_gs())
+midi_play(midi = demo_midi(), soundfont = general_user_gs(), progress = TRUE)
 
 midi_convert(
   midi = demo_midi(),
@@ -19,9 +19,9 @@ midi_convert(
 
 \item{soundfont}{path to the soundfont}
 
-\item{output}{filename of the output. It is recommended to use wav output.}
-
 \item{progress}{print status progress to the terminal}
+
+\item{output}{filename of the output. It is recommended to use wav output.}
 }
 \description{
 You need a soundfont to play midi.
