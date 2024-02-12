@@ -17,7 +17,7 @@ midi_play <- function(midi = demo_midi(), soundfont = general_user_gs()){
 
 #' @rdname miditools
 #' @export
-#' @rdname output filename of the output. It is recommended to use wav output.
+#' @param output filename of the output. It is recommended to use wav output.
 midi_convert <- function(midi = demo_midi(), soundfont = general_user_gs(), output = 'output.wav'){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)

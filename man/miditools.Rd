@@ -17,6 +17,8 @@ midi_convert(
 \item{midi}{path to the midi file}
 
 \item{soundfont}{path to the soundfont}
+
+\item{output}{filename of the output. It is recommended to use wav output.}
 }
 \description{
 You need a soundfont to play midi.
