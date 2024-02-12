@@ -10,7 +10,7 @@ int pending_interrupt(void) {
   return !(R_ToplevelExec(check_interrupt_fn, NULL));
 }
 
-SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP outfile){
+SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP outfile, SEXP progress){
   const char *midi_file = CHAR(Rf_asChar(midi));
   const char *soundfont_file = CHAR(Rf_asChar(soundfont));
   const char *output_file = Rf_length(outfile) ? CHAR(Rf_asChar(outfile)) : NULL;
@@ -46,15 +46,26 @@ SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP outfile){
   fluid_player_play(player);
 
   /* play until we interrupt */
+  int total = 0;
   while(fluid_player_get_status(player) == FLUID_PLAYER_PLAYING){
     if(output_file){
       if(fluid_file_renderer_process_block(renderer) != FLUID_OK)
         break;
+      if(Rf_asLogical(progress)){
+        int now = fluid_player_get_current_tick(player);
+        if(total == 0)
+          total = fluid_player_get_total_ticks(player);
+        if(now < total){
+          REprintf("\r%d/%d", now, total);
+        } else {
+          REprintf("\r");
+        }
+      }
     } else {
       usleep(200);
-      if(pending_interrupt()){
-        fluid_player_stop(player);
-      }
+    }
+    if(pending_interrupt()){
+      fluid_player_stop(player);
     }
   }
 

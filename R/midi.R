@@ -12,17 +12,20 @@
 midi_play <- function(midi = demo_midi(), soundfont = general_user_gs()){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
-  .Call(C_midi_play, midi, soundfont, NULL)
+  .Call(C_midi_play, midi, soundfont, NULL, FALSE)
 }
 
 #' @rdname miditools
 #' @export
 #' @param output filename of the output. It is recommended to use wav output.
-midi_convert <- function(midi = demo_midi(), soundfont = general_user_gs(), output = 'output.wav'){
+#' @param progress print status progress to the terminal
+midi_convert <- function(midi = demo_midi(), soundfont = general_user_gs(), output = 'output.wav',
+                         progress = TRUE){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
   output <- normalizePath(output, mustWork = FALSE)
-  .Call(C_midi_play, midi, soundfont, output)
+  progress <- as.logical(progress)
+  .Call(C_midi_play, midi, soundfont, output, progress)
 }
 
 general_user_gs <- function(){
