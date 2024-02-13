@@ -1,15 +1,16 @@
 #' Fluidsynth settings
 #'
-#' List available settings and their types.
+#' Get available settings and their types.
 #'
 #' @export
+#' @name fluidsynth_settings
 #' @rdname fluidsynth_settings
 #' @useDynLib miditools C_fluidsynth_list_settings
 #' @examples
 #' # List available settings:
 #' fluidsynth_setting_list()
 #' fluidsynth_setting_options('audio.driver')
-#' fluidsynth_setting_default('audio.driver')
+#' fluidsynth_setting_default('synth.sample-rate')
 fluidsynth_setting_list <- function(){
   out <- .Call(C_fluidsynth_list_settings)
   names(out) <- c('name', 'type')
@@ -19,7 +20,7 @@ fluidsynth_setting_list <- function(){
 #' @export
 #' @rdname fluidsynth_settings
 #' @useDynLib miditools C_fluidsynth_list_options
-#' @param setting string with one of the options listed in [fluidsynth_settings]
+#' @param setting string with one of the options listed in [fluidsynth_setting_list()]
 fluidsynth_setting_options <- function(setting){
   setting <- as.character(setting)
   .Call(C_fluidsynth_list_options, setting)
