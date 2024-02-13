@@ -3,12 +3,12 @@
 
 static int option_count = 0;
 
-static const char * type_to_string(enum fluid_types_enum val){
+static const char * type_to_string(enum fluid_types_enum type){
   static const char *string_type = "string";
   static const char *double_type = "double";
   static const char *integer_type = "integer";
   static const char *set_type = "set";
-  switch (val) {
+  switch (type) {
   case FLUID_NUM_TYPE:
     return double_type;
   case FLUID_STR_TYPE:
@@ -60,5 +60,30 @@ SEXP C_fluidsynth_list_options(SEXP setting){
   fluid_settings_foreach_option(settings, CHAR(Rf_asChar(setting)), out, option_iter);
   delete_fluid_settings(settings);
   UNPROTECT(1);
+  return out;
+}
+
+SEXP C_fluidsynth_get_default(SEXP setting){
+  const char *name = CHAR(Rf_asChar(setting));
+  fluid_settings_t* settings = new_fluid_settings();
+  int type = fluid_settings_get_type(settings, name);
+  char *strval = "";
+  SEXP out = R_NilValue;
+  switch (type) {
+  case FLUID_NUM_TYPE:
+    out = PROTECT(Rf_ScalarReal(NA_REAL));
+    fluid_settings_getnum_default(settings, name, REAL(out));
+    break;
+  case FLUID_INT_TYPE:
+    out = PROTECT(Rf_ScalarInteger(NA_INTEGER));
+    fluid_settings_getint_default(settings, name, INTEGER(out));
+    break;
+  case FLUID_STR_TYPE:
+    fluid_settings_getstr_default(settings, name, &strval);
+    out = PROTECT(Rf_mkString(strval));
+    break;
+  }
+  UNPROTECT(1);
+  delete_fluid_settings(settings);
   return out;
 }
