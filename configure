@@ -5,7 +5,7 @@
 # R CMD INSTALL --configure-vars='INCLUDE_DIR=/.../include LIB_DIR=/.../lib'
 
 # Library settings
-PKG_CONFIG_NAME="FluidSynth"
+PKG_CONFIG_NAME="fluidsynth"
 PKG_DEB_NAME="libfluidsynth-dev"
 PKG_RPM_NAME="fluidsynth-devel"
 PKG_BREW_NAME="fluidsynth"
@@ -69,6 +69,14 @@ if [ $? -ne 0 ]; then
   echo "--------------------------------------------------------------------"
   exit 1
 fi
+
+# On Linux we need to initiate SDL manually
+case "$PKG_CFLAGS" in
+  *SDL2*)
+    PKG_CFLAGS="$PKG_CFLAGS -DHAS_LIBSDL2"
+    PKG_LIBS="$PKG_LIBS -lSDL2"
+  ;;
+esac
 
 # Write to Makevars
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars

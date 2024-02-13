@@ -1,6 +1,9 @@
 #include <Rinternals.h>
 #include <stdlib.h>
 #include <R_ext/Rdynload.h>
+#ifdef HAS_LIBSDL2
+#include <SDL2/SDL.h>
+#endif
 
 /* .Call calls */
 extern SEXP C_midi_play(SEXP, SEXP, SEXP);
@@ -11,6 +14,9 @@ static const R_CallMethodDef CallEntries[] = {
 };
 
 void R_init_miditools(DllInfo *dll){
+#ifdef HAS_LIBSDL2
+   SDL_Init(SDL_INIT_AUDIO);
+#endif
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
 }
