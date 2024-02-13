@@ -10,7 +10,7 @@ int pending_interrupt(void) {
   return !(R_ToplevelExec(check_interrupt_fn, NULL));
 }
 
-SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP outfile, SEXP progress){
+SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP outfile, SEXP audio_driver, SEXP progress){
   const char *midi_file = CHAR(Rf_asChar(midi));
   const char *soundfont_file = CHAR(Rf_asChar(soundfont));
   const char *output_file = Rf_length(outfile) ? CHAR(Rf_asChar(outfile)) : NULL;
@@ -26,6 +26,9 @@ SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP outfile, SEXP progress){
     fluid_settings_setstr(settings, "audio.file.name", CHAR(Rf_asChar(outfile)));
     fluid_settings_setstr(settings, "player.timing-source", "sample");
     fluid_settings_setint(settings, "synth.lock-memory", 0);
+  } else {
+    if(Rf_length(audio_driver))
+      fluid_settings_setstr(settings, "audio.driver", CHAR(Rf_asChar(audio_driver)));
   }
 
   fluid_synth_t* synth = new_fluid_synth(settings);
