@@ -5,7 +5,12 @@
 \alias{midi_convert}
 \title{Play a midi file}
 \usage{
-midi_play(midi = demo_midi(), soundfont = general_user_gs(), progress = TRUE)
+midi_play(
+  midi = demo_midi(),
+  soundfont = general_user_gs(),
+  audio.driver = NULL,
+  progress = TRUE
+)
 
 midi_convert(
   midi = demo_midi(),
@@ -18,6 +23,9 @@ midi_convert(
 \item{midi}{path to the midi file}
 
 \item{soundfont}{path to the soundfont}
+
+\item{audio.driver}{which audio driver to use,
+see \href{https://www.fluidsynth.org/api/CreatingAudioDriver.html}{fluidsynth docs}}
 
 \item{progress}{print status progress to the terminal}
 

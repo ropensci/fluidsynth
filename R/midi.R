@@ -9,11 +9,14 @@
 #' @rdname miditools
 #' @param midi path to the midi file
 #' @param soundfont path to the soundfont
-midi_play <- function(midi = demo_midi(), soundfont = general_user_gs(), progress = TRUE){
+#' @param audio.driver which audio driver to use,
+#' see [fluidsynth docs](https://www.fluidsynth.org/api/CreatingAudioDriver.html)
+midi_play <- function(midi = demo_midi(), soundfont = general_user_gs(), audio.driver = NULL, progress = TRUE){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
   progress <- as.logical(progress)
-  .Call(C_midi_play, midi, soundfont, NULL, progress)
+  audio.driver <- as.character(audio.driver)
+  .Call(C_midi_play, midi, soundfont, audio.driver, progress)
   invisible()
 }
 
@@ -25,10 +28,10 @@ midi_convert <- function(midi = demo_midi(), soundfont = general_user_gs(), outp
                          progress = TRUE){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
-  output <- normalizePath(output, mustWork = FALSE)
+  output <- structure(normalizePath(output, mustWork = FALSE), class = 'outputfile')
   progress <- as.logical(progress)
   .Call(C_midi_play, midi, soundfont, output, progress)
-  output
+  c(output)
 }
 
 general_user_gs <- function(){
