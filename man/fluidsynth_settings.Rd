@@ -2,10 +2,21 @@
 % Please edit documentation in R/settings.R
 \name{fluidsynth_settings}
 \alias{fluidsynth_settings}
+\alias{fluidsynth_list_options}
 \title{Fluidsynth settings}
 \usage{
 fluidsynth_settings()
+
+fluidsynth_list_options(setting)
+}
+\arguments{
+\item{setting}{string with one of the options listed in \link{fluidsynth_settings}}
 }
 \description{
 List available settings and their types.
+}
+\examples{
+# List available settings:
+fluidsynth_settings()
+fluidsynth_list_options('audio.driver')
 }

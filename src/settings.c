@@ -31,14 +31,34 @@ static void setting_iter(void *data, const char *name, int type){
 }
 
 SEXP C_fluidsynth_list_settings(void){
-  fluid_settings_t* settings = new_fluid_settings();
   option_count = 0;
+  fluid_settings_t* settings = new_fluid_settings();
   fluid_settings_foreach(settings, NULL, setting_iter);
   SEXP df = PROTECT(Rf_allocVector(VECSXP, 2));
   SET_VECTOR_ELT(df, 0, Rf_allocVector(STRSXP, option_count));
   SET_VECTOR_ELT(df, 1, Rf_allocVector(STRSXP, option_count));
   option_count = 0;
   fluid_settings_foreach(settings, df, setting_iter);
+  delete_fluid_settings(settings);
   UNPROTECT(1);
   return df;
+}
+
+static void option_iter(void *data, const char *name, const char *option){
+  if(data != NULL){
+    SET_STRING_ELT((SEXP) data, option_count, Rf_mkChar(option));
+  }
+  option_count++;
+}
+
+SEXP C_fluidsynth_list_options(SEXP setting){
+  option_count = 0;
+  fluid_settings_t* settings = new_fluid_settings();
+  fluid_settings_foreach_option(settings, CHAR(Rf_asChar(setting)), NULL, option_iter);
+  SEXP out = PROTECT(Rf_allocVector(STRSXP, option_count));
+  option_count = 0;
+  fluid_settings_foreach_option(settings, CHAR(Rf_asChar(setting)), out, option_iter);
+  delete_fluid_settings(settings);
+  UNPROTECT(1);
+  return out;
 }
