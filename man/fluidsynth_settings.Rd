@@ -14,14 +14,19 @@ fluidsynth_setting_options(setting)
 fluidsynth_setting_default(setting)
 }
 \arguments{
-\item{setting}{string with one of the options listed in \code{\link[=fluidsynth_setting_list]{fluidsynth_setting_list()}}}
+\item{setting}{string with one of the options listed in \code{\link[=fluidsynth_setting_list]{fluidsynth_setting_list()}}, see examples.}
 }
 \description{
 Get available settings and their types.
+See \href{https://www.fluidsynth.org/api/fluidsettings.html}{fluidsynth docs}
+for more information on the available options.
 }
 \examples{
 # List available settings:
 fluidsynth_setting_list()
 fluidsynth_setting_options('audio.driver')
 fluidsynth_setting_default('synth.sample-rate')
+}
+\references{
+\href{https://www.fluidsynth.org/api/fluidsettings.html}{FluidSynth Settings Reference}
 }
