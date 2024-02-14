@@ -3,12 +3,13 @@
 \name{midi_play}
 \alias{midi_play}
 \alias{midi_convert}
-\title{Play a midi file}
+\title{Play or convert a midi file}
 \usage{
 midi_play(
   midi = demo_midi(),
   soundfont = general_user_gs(),
   audio.driver = NULL,
+  settings = list(),
   progress = TRUE
 )
 
@@ -16,6 +17,7 @@ midi_convert(
   midi = demo_midi(),
   soundfont = general_user_gs(),
   output = "output.wav",
+  settings = list(),
   progress = TRUE
 )
 }
@@ -27,12 +29,26 @@ midi_convert(
 \item{audio.driver}{which audio driver to use,
 see \href{https://www.fluidsynth.org/api/CreatingAudioDriver.html}{fluidsynth docs}}
 
+\item{settings}{a named vector with additional settings from \code{\link[=fluidsynth_setting_list]{fluidsynth_setting_list()}}}
+
 \item{progress}{print status progress to the terminal}
 
 \item{output}{filename of the output. It is recommended to use wav output.}
 }
 \description{
+Renders a midi file to your audio device or to a wav file. Additional settings
+can be specified, see \link{fluidsynth_setting_list} for availble options.
+On Linux you may need to specify an \code{audio.driver} that works for your hardware.
+}
+\details{
+On some platforms \link{midi_convert} supports writing other formats than wav, but
+this does not always work well. Instead it is recommended to use \link[av:encoding]{av::av_audio_convert}
+to convert the wav file into any of the popular audio formats.
+
 You need a soundfont to play midi.
 A free soundfont called \href{https://www.schristiancollins.com/generaluser.php}{GeneralUser-GS} is
 included with this package.
+}
+\examples{
+midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.wav')
 }

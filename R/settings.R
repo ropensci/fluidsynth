@@ -33,3 +33,25 @@ fluidsynth_setting_default <- function(setting){
   setting <- as.character(setting)
   .Call(C_fluidsynth_get_default, setting)
 }
+
+validate_fluidsynth_settings <- function(opts){
+  if(length(opts)){
+    settings <- fluidsynth_setting_list()
+    for(o in names(opts)){
+      if(!(o %in% settings$name))
+        stop("Unsupported fluidsynth option: ", o)
+      val <- opts[[o]]
+      if(length(val) != 1)
+        stop("Option is not of length 1: ", o)
+      type <- settings[settings$name == o, "type"]
+      if(type == 'string' && !is.character(val))
+        stop("Option should be a string: ", o)
+      if(type != 'string'){
+        if(!is.numeric(val))
+          stop("Option should be a number: ", o)
+        opts[[o]] <- as.numeric(val)
+      }
+    }
+    return(opts)
+  }
+}

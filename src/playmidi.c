@@ -2,15 +2,35 @@
 #include <Rinternals.h>
 #include <unistd.h>
 
-void check_interrupt_fn(void *dummy) {
+static void check_interrupt_fn(void *dummy) {
   R_CheckUserInterrupt();
 }
 
-int pending_interrupt(void) {
+static int pending_interrupt(void) {
   return !(R_ToplevelExec(check_interrupt_fn, NULL));
 }
 
-SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP output, SEXP progress){
+static void set_user_settings(fluid_settings_t* settings, SEXP userset){
+  SEXP optnames = Rf_getAttrib(userset, R_NamesSymbol);
+  for(int i = 0; i < Rf_length(userset); i++){
+    SEXP val = VECTOR_ELT(userset, i);
+    const char *optname = CHAR(STRING_ELT(optnames, i));
+    int type = fluid_settings_get_type(settings, optname);
+    switch (type) {
+    case FLUID_NUM_TYPE:
+      fluid_settings_setnum(settings, optname, REAL(val)[0]);
+      break;
+    case FLUID_INT_TYPE:
+      fluid_settings_setnum(settings, optname, (int) REAL(val)[0]);
+      break;
+    case FLUID_STR_TYPE:
+      fluid_settings_setstr(settings, optname, CHAR(Rf_asChar(val)));
+      break;
+    }
+  }
+}
+
+SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP output, SEXP userset, SEXP progress){
   const char *midi_file = CHAR(Rf_asChar(midi));
   const char *soundfont_file = CHAR(Rf_asChar(soundfont));
   const char *output_str = Rf_length(output) ? CHAR(Rf_asChar(output)) : NULL;
@@ -32,6 +52,9 @@ SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP output, SEXP progress){
     if(output_str)
       fluid_settings_setstr(settings, "audio.driver", output_str);
   }
+
+  /* Custom user settings */
+  set_user_settings(settings, userset);
 
   fluid_synth_t* synth = new_fluid_synth(settings);
   fluid_player_t* player = new_fluid_player(synth);
