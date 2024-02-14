@@ -23,7 +23,7 @@
 #' @examples
 #' midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.wav')
 midi_play <- function(midi = demo_midi(), soundfont = general_user_gs(), audio.driver = NULL,
-                      settings = list(), progress = TRUE){
+                      settings = list(), progress = interactive()){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
   progress <- as.logical(progress)
@@ -38,7 +38,7 @@ midi_play <- function(midi = demo_midi(), soundfont = general_user_gs(), audio.d
 #' @param output filename of the output. It is recommended to use wav output.
 #' @param progress print status progress to the terminal
 midi_convert <- function(midi = demo_midi(), soundfont = general_user_gs(), output = 'output.wav',
-                         settings = list(), progress = TRUE){
+                         settings = list(), progress = interactive()){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
   output <- structure(normalizePath(output, mustWork = FALSE), class = 'outputfile')

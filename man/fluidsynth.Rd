@@ -10,7 +10,7 @@ midi_play(
   soundfont = general_user_gs(),
   audio.driver = NULL,
   settings = list(),
-  progress = TRUE
+  progress = interactive()
 )
 
 midi_convert(
@@ -18,7 +18,7 @@ midi_convert(
   soundfont = general_user_gs(),
   output = "output.wav",
   settings = list(),
-  progress = TRUE
+  progress = interactive()
 )
 }
 \arguments{
