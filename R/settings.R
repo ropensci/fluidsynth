@@ -7,7 +7,7 @@
 #' @export
 #' @name fluidsynth_settings
 #' @rdname fluidsynth_settings
-#' @useDynLib miditools C_fluidsynth_list_settings
+#' @useDynLib fluidsynth C_fluidsynth_list_settings
 #' @references [FluidSynth Settings Reference](https://www.fluidsynth.org/api/fluidsettings.html)
 #' @examples
 #' # List available settings:
@@ -22,7 +22,7 @@ fluidsynth_setting_list <- function(){
 
 #' @export
 #' @rdname fluidsynth_settings
-#' @useDynLib miditools C_fluidsynth_list_options
+#' @useDynLib fluidsynth C_fluidsynth_list_options
 #' @param setting string with one of the options listed in [fluidsynth_setting_list()], see examples.
 fluidsynth_setting_options <- function(setting){
   setting <- as.character(setting)
@@ -31,7 +31,7 @@ fluidsynth_setting_options <- function(setting){
 
 #' @export
 #' @rdname fluidsynth_settings
-#' @useDynLib miditools C_fluidsynth_get_default
+#' @useDynLib fluidsynth C_fluidsynth_get_default
 fluidsynth_setting_default <- function(setting){
   setting <- as.character(setting)
   .Call(C_fluidsynth_get_default, setting)

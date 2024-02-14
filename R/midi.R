@@ -12,9 +12,9 @@
 #' A free soundfont called [GeneralUser-GS](https://www.schristiancollins.com/generaluser.php) is
 #' included with this package.
 #'
-#' @useDynLib miditools C_midi_play
+#' @useDynLib fluidsynth C_midi_play
 #' @export
-#' @rdname miditools
+#' @rdname fluidsynth
 #' @param midi path to the midi file
 #' @param soundfont path to the soundfont
 #' @param settings a named vector with additional settings from [fluidsynth_setting_list()]
@@ -33,7 +33,7 @@ midi_play <- function(midi = demo_midi(), soundfont = general_user_gs(), audio.d
   invisible()
 }
 
-#' @rdname miditools
+#' @rdname fluidsynth
 #' @export
 #' @param output filename of the output. It is recommended to use wav output.
 #' @param progress print status progress to the terminal
@@ -49,9 +49,9 @@ midi_convert <- function(midi = demo_midi(), soundfont = general_user_gs(), outp
 }
 
 general_user_gs <- function(){
-  system.file(package = 'miditools', 'generaluser-gs/v1.471.sf2', mustWork = TRUE)
+  system.file(package = 'fluidsynth', 'generaluser-gs/v1.471.sf2', mustWork = TRUE)
 }
 
 demo_midi <- function(){
-  list.files(system.file(package = 'miditools', 'generaluser-gs/midi'), full.names = TRUE)
+  list.files(system.file(package = 'fluidsynth', 'generaluser-gs/midi'), full.names = TRUE)
 }

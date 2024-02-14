@@ -1,13 +1,13 @@
-# miditools
+# fluidsynth
 
 Bindings to libfluidsynth to play and render midi files.
 
 ## Installation
 
-You can install the development version of miditools with:
+You can install the development version of fluidsynth with:
 
 ``` r
-# install.packages("miditools", repos = 'https://ropensci.r-universe.dev')
+# install.packages("fluidsynth", repos = 'https://ropensci.r-universe.dev')
 ```
 
 On Debian/Ubuntu you need to install `libfluidsynth-dev` first:

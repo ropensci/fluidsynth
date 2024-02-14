@@ -1,4 +1,4 @@
-Package: miditools
+Package: fluidsynth
 Type: Package
 Title: Play and Render MIDI files in R
 Version: 0.1.0

@@ -19,7 +19,7 @@ static const R_CallMethodDef CallEntries[] = {
   {NULL, NULL, 0}
 };
 
-void R_init_miditools(DllInfo *dll){
+void R_init_fluidsynth(DllInfo *dll){
 #ifdef HAS_LIBSDL2
    SDL_Init(SDL_INIT_AUDIO);
 #endif
