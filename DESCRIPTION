@@ -11,3 +11,5 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Suggests: av
 SystemRequirements: fluidsynth: fluidsynth-devel (rpm) or libfluidsynth-dev (deb).
+URL: https://docs.ropensci.org/fluidsynth/
+BugReports: https://github.com/ropensci/fluidsynth/issues
