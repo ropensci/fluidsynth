@@ -1,13 +1,14 @@
 # fluidsynth
 
-Bindings to libfluidsynth to play and render midi files.
+Bindings to libfluidsynth to play and render midi files. 
+See https://docs.ropensci.org/fluidsynth
 
 ## Installation
 
 You can install the development version of fluidsynth with:
 
-``` r
-# install.packages("fluidsynth", repos = 'https://ropensci.r-universe.dev')
+```r
+install.packages("fluidsynth", repos = 'https://ropensci.r-universe.dev')
 ```
 
 On Debian/Ubuntu you need to install `libfluidsynth-dev` first:
