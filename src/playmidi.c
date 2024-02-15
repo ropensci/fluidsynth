@@ -44,7 +44,7 @@ SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP output, SEXP userset, SEXP prog
 
   /* To save output to a file: https://www.fluidsynth.org/api/settings_audio.html */
   if(play_to_file){
-    fluid_settings_setstr(settings, "audio.file.type", "wav");
+    //fluid_settings_setstr(settings, "audio.file.type", "wav");
     fluid_settings_setstr(settings, "audio.file.name", output_str);
     fluid_settings_setstr(settings, "player.timing-source", "sample");
     fluid_settings_setint(settings, "synth.lock-memory", 0);
