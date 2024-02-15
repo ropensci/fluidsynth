@@ -7,7 +7,7 @@
 \usage{
 midi_play(
   midi = demo_midi(),
-  soundfont = general_user_gs(),
+  soundfont = soundfont_path(),
   audio.driver = NULL,
   settings = list(),
   progress = interactive()
@@ -15,7 +15,7 @@ midi_play(
 
 midi_convert(
   midi = demo_midi(),
-  soundfont = general_user_gs(),
+  soundfont = soundfont_path(),
   output = "output.wav",
   settings = list(),
   progress = interactive()

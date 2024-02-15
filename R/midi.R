@@ -22,7 +22,7 @@
 #' see [fluidsynth docs](https://www.fluidsynth.org/api/CreatingAudioDriver.html)
 #' @examples
 #' midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.wav')
-midi_play <- function(midi = demo_midi(), soundfont = general_user_gs(), audio.driver = NULL,
+midi_play <- function(midi = demo_midi(), soundfont = soundfont_path(), audio.driver = NULL,
                       settings = list(), progress = interactive()){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
@@ -37,7 +37,7 @@ midi_play <- function(midi = demo_midi(), soundfont = general_user_gs(), audio.d
 #' @export
 #' @param output filename of the output. It is recommended to use wav output.
 #' @param progress print status progress to the terminal
-midi_convert <- function(midi = demo_midi(), soundfont = general_user_gs(), output = 'output.wav',
+midi_convert <- function(midi = demo_midi(), soundfont = soundfont_path(), output = 'output.wav',
                          settings = list(), progress = interactive()){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
@@ -46,10 +46,6 @@ midi_convert <- function(midi = demo_midi(), soundfont = general_user_gs(), outp
   settings <- validate_fluidsynth_settings(settings)
   .Call(C_midi_play, midi, soundfont, output, settings, progress)
   c(output)
-}
-
-general_user_gs <- function(){
-  system.file(package = 'fluidsynth', 'generaluser-gs/v1.471.sf2', mustWork = TRUE)
 }
 
 demo_midi <- function(){
