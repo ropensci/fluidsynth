@@ -90,7 +90,7 @@ SEXP C_midi_play(SEXP midi, SEXP soundfont, SEXP output, SEXP userset, SEXP prog
       if(total == 0)
         total = fluid_player_get_total_ticks(player);
       if(now < total){
-        REprintf("\r%d/%d", now, total);
+        REprintf("\rSynthesizing midi: %d/%d", now, total);
       } else {
         REprintf("\r");
       }

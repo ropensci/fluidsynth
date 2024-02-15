@@ -23,29 +23,30 @@
 #' @examples
 #' midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.wav')
 midi_play <- function(midi = demo_midi(), soundfont = soundfont_path(), audio.driver = NULL,
-                      settings = list(), progress = interactive()){
+                      settings = list(), verbose = interactive()){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
-  progress <- as.logical(progress)
+  verbose <- as.logical(verbose)
   audio.driver <- as.character(audio.driver)
   settings <- validate_fluidsynth_settings(settings)
-  .Call(C_midi_play, midi, soundfont, audio.driver, settings, progress)
+  .Call(C_midi_play, midi, soundfont, audio.driver, settings, verbose)
   invisible()
 }
 
 #' @rdname fluidsynth
 #' @export
-#' @param output filename of the output. It is recommended to use wav output.
-#' @param progress print status progress to the terminal
-midi_convert <- function(midi = demo_midi(), soundfont = soundfont_path(), output = 'output.wav',
-                         settings = list(), progress = interactive()){
+#' @param output filename of the output. The out
+#' @param verbose print some progress status to the terminal
+midi_convert <- function(midi = demo_midi(), soundfont = soundfont_path(), output = 'output.mp3',
+                         settings = list(), verbose = interactive()){
   midi <- normalizePath(midi, mustWork = TRUE)
   soundfont <- normalizePath(soundfont, mustWork = TRUE)
-  output <- structure(normalizePath(output, mustWork = FALSE), class = 'outputfile')
-  progress <- as.logical(progress)
+  tmp <- structure(tempfile(fileext = '.wav'), class = 'outputfile')
+  on.exit(unlink(tmp))
+  verbose <- as.logical(verbose)
   settings <- validate_fluidsynth_settings(settings)
-  .Call(C_midi_play, midi, soundfont, output, settings, progress)
-  c(output)
+  .Call(C_midi_play, midi, soundfont, tmp, settings, verbose)
+  av::av_audio_convert(tmp, output, verbose = verbose)
 }
 
 demo_midi <- function(){

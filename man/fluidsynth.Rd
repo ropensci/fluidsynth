@@ -10,15 +10,15 @@ midi_play(
   soundfont = soundfont_path(),
   audio.driver = NULL,
   settings = list(),
-  progress = interactive()
+  verbose = interactive()
 )
 
 midi_convert(
   midi = demo_midi(),
   soundfont = soundfont_path(),
-  output = "output.wav",
+  output = "output.mp3",
   settings = list(),
-  progress = interactive()
+  verbose = interactive()
 )
 }
 \arguments{
@@ -31,9 +31,9 @@ see \href{https://www.fluidsynth.org/api/CreatingAudioDriver.html}{fluidsynth do
 
 \item{settings}{a named vector with additional settings from \code{\link[=fluidsynth_setting_list]{fluidsynth_setting_list()}}}
 
-\item{progress}{print status progress to the terminal}
+\item{verbose}{print some progress status to the terminal}
 
-\item{output}{filename of the output. It is recommended to use wav output.}
+\item{output}{filename of the output. The out}
 }
 \description{
 Renders a midi file to your audio device or to a wav file. Additional settings
