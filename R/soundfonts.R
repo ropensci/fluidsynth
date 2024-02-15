@@ -34,9 +34,9 @@ download_generaluser_gs <- function(){
     url <- 'https://github.com/ropensci/fluidsynth/releases/download/generaluser-gs-v1.471/generaluser-gs-v1.471.zip'
     if(getOption('timeout') < 300) options(timeout = 300)
     on.exit(unlink('generaluser-gs-v1.471.zip'))
-    download.file(url, 'generaluser-gs-v1.471.zip')
+    utils::download.file(url, 'generaluser-gs-v1.471.zip')
     dir.create(dirname(path), showWarnings = FALSE)
-    unzip('generaluser-gs-v1.471.zip', exdir = dirname(path))
+    utils::unzip('generaluser-gs-v1.471.zip', exdir = dirname(path))
   }
   return(path)
 }
