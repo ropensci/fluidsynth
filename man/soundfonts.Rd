@@ -3,12 +3,12 @@
 \name{soundfonts}
 \alias{soundfonts}
 \alias{soundfont_path}
-\alias{soundfont_generaluser_gs}
+\alias{download_generaluser_gs}
 \title{Managing soundfonts}
 \usage{
 soundfont_path(download = TRUE)
 
-soundfont_generaluser_gs(download = TRUE)
+download_generaluser_gs()
 }
 \arguments{
 \item{download}{automatically download soundfont if none exists.}
@@ -20,6 +20,6 @@ midi sounds very poor, try seleting another soundfont.
 }
 \details{
 \href{https://schristiancollins.com/generaluser}{GenralUser-GS} by S. Christian Collins
-is a nice free soundfont. The \code{soundfont_generaluser_gs()} function will
-automatically download a copy to for this package.
+is a nice free soundfont. The \code{download_generaluser_gs()} function will
+automatically download a copy to that will be picked up by this package.
 }
