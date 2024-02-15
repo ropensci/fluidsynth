@@ -20,7 +20,10 @@ soundfont_path <- function(download = TRUE){
   if(file.exists(default)){
     return(default)
   }
-  soundfont_generaluser_gs(download = download)
+  if(grepl('redhat-linux', R.version$platform)){
+    stop('No soundfont found. Install one using either "yum install fluid-soundfont-gm" or in R: download_generaluser_gs()')
+  }
+  download_generaluser_gs()
 }
 
 #' @export
