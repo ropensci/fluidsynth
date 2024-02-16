@@ -53,5 +53,6 @@ A free soundfont called \href{https://www.schristiancollins.com/generaluser.php}
 included with this package.
 }
 \examples{
-midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.wav')
+midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.mp3')
+unink("lowquality.mp3")
 }

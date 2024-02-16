@@ -5,3 +5,6 @@
 ^.*\.log
 ^README.md$
 ^LICENSE\.md$
+^.*\.mp3
+^.*\.wav
+^.*\.midi

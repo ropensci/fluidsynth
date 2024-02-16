@@ -21,7 +21,8 @@
 #' @param audio.driver which audio driver to use,
 #' see [fluidsynth docs](https://www.fluidsynth.org/api/CreatingAudioDriver.html)
 #' @examples
-#' midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.wav')
+#' midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.mp3')
+#' unink("lowquality.mp3")
 midi_play <- function(midi = demo_midi(), soundfont = soundfont_path(), audio.driver = NULL,
                       settings = list(), verbose = interactive()){
   midi <- normalizePath(midi, mustWork = TRUE)
