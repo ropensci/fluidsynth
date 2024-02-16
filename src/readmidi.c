@@ -11,13 +11,13 @@ static int pending_interrupt(void) {
 }
 
 static size_t event_count = 0;
-static size_t tick_count = 0;
+static fluid_player_t* global_player = NULL;
 static int event_callback(void *data, fluid_midi_event_t *event){
   if(data){
     //fluid_event_t *evt = new_fluid_event();
     //fluid_event_from_midi_event(evt, event);
     SEXP df = data;
-    INTEGER(VECTOR_ELT(df, 0))[event_count] = tick_count;
+    INTEGER(VECTOR_ELT(df, 0))[event_count] = fluid_player_get_current_tick(global_player);
     INTEGER(VECTOR_ELT(df, 1))[event_count] = fluid_midi_event_get_type(event);
     INTEGER(VECTOR_ELT(df, 2))[event_count] = fluid_midi_event_get_channel(event);
     INTEGER(VECTOR_ELT(df, 3))[event_count] = fluid_midi_event_get_key(event);
@@ -25,11 +25,6 @@ static int event_callback(void *data, fluid_midi_event_t *event){
     //delete_fluid_event(evt);
   }
   event_count++;
-  return FLUID_OK;
-}
-
-static int tick_callback(void *data, int tick){
-  tick_count++;
   return FLUID_OK;
 }
 
@@ -65,7 +60,7 @@ SEXP C_midi_data(SEXP midi, SEXP progress){
   /* Restart play again */
   event_count = 0;
   fluid_player_set_playback_callback(player, event_callback, df);
-  fluid_player_set_tick_callback(player, tick_callback, NULL);
+  global_player = player;
   fluid_player_play(player);
   while(fluid_player_get_status(player) == FLUID_PLAYER_PLAYING){
     if(fluid_synth_process(synth, 2000, 0, NULL, 0, NULL) != FLUID_OK)
