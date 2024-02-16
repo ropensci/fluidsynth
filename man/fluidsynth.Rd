@@ -54,5 +54,5 @@ included with this package.
 }
 \examples{
 midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.mp3')
-unink("lowquality.mp3")
+unlink("lowquality.mp3")
 }
