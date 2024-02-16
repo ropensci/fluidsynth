@@ -3,6 +3,7 @@
 \name{midi_play}
 \alias{midi_play}
 \alias{midi_convert}
+\alias{midi_data}
 \title{Play or convert a midi file}
 \usage{
 midi_play(
@@ -20,6 +21,8 @@ midi_convert(
   settings = list(),
   verbose = interactive()
 )
+
+midi_data(midi = demo_midi(), verbose = interactive())
 }
 \arguments{
 \item{midi}{path to the midi file}

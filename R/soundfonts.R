@@ -41,7 +41,10 @@ download_generaluser_gs <- function(){
   return(path)
 }
 
-
 generaluser_gs_path <- function(){
   file.path(system.file(package = 'fluidsynth'), 'generaluser-gs/v1.471.sf2')
+}
+
+demo_midi <- function(){
+  list.files(system.file(package = 'fluidsynth', 'generaluser-gs/midi'), full.names = TRUE)
 }

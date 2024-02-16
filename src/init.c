@@ -10,12 +10,15 @@ extern SEXP C_fluidsynth_list_settings(void);
 extern SEXP C_fluidsynth_list_options(SEXP);
 extern SEXP C_fluidsynth_get_default(SEXP);
 extern SEXP C_midi_play(SEXP, SEXP, SEXP, SEXP, SEXP);
+extern SEXP C_midi_data(SEXP, SEXP);
+
 
 static const R_CallMethodDef CallEntries[] = {
   {"C_fluidsynth_list_options", (DL_FUNC) &C_fluidsynth_list_options, 1},
   {"C_fluidsynth_get_default", (DL_FUNC) &C_fluidsynth_get_default, 1},
   {"C_fluidsynth_list_settings", (DL_FUNC) &C_fluidsynth_list_settings, 0},
   {"C_midi_play", (DL_FUNC) &C_midi_play, 5},
+  {"C_midi_data", (DL_FUNC) &C_midi_data, 2},
   {NULL, NULL, 0}
 };
 
