@@ -4,9 +4,9 @@
 #' can be specified, see [fluidsynth_setting_list] for availble options.
 #' On Linux you may need to specify an `audio.driver` that works for your hardware.
 #'
-#' On some platforms [midi_convert] supports writing other formats than wav, but
-#' this does not always work well. Instead it is recommended to use [av::av_audio_convert]
-#' to convert the wav file into any of the popular audio formats.
+#' The `midi_convert` function internally uses fluidsynth to generate a raw wav file,
+#' and then [av::av_audio_convert()] to convert into the requested about format. See
+#' [av::av_muxers()] for supported output formats and their corresponding file extension.
 #'
 #' You need a soundfont to play midi.
 #' A free soundfont called [GeneralUser-GS](https://www.schristiancollins.com/generaluser.php) is

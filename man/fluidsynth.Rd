@@ -41,9 +41,9 @@ can be specified, see \link{fluidsynth_setting_list} for availble options.
 On Linux you may need to specify an \code{audio.driver} that works for your hardware.
 }
 \details{
-On some platforms \link{midi_convert} supports writing other formats than wav, but
-this does not always work well. Instead it is recommended to use \link[av:encoding]{av::av_audio_convert}
-to convert the wav file into any of the popular audio formats.
+The \code{midi_convert} function internally uses fluidsynth to generate a raw wav file,
+and then \code{\link[av:encoding]{av::av_audio_convert()}} to convert into the requested about format. See
+\code{\link[av:formats]{av::av_muxers()}} for supported output formats and their corresponding file extension.
 
 You need a soundfont to play midi.
 A free soundfont called \href{https://www.schristiancollins.com/generaluser.php}{GeneralUser-GS} is
