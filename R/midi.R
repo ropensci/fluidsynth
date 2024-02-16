@@ -57,7 +57,7 @@ midi_data <- function(midi = demo_midi(), verbose = interactive()){
   midi <- normalizePath(midi, mustWork = TRUE)
   verbose <- as.logical(verbose)
   out <- .Call(C_midi_data, midi, verbose)
-  names(out) <- c("tick", "type", "channel", "key", "value")
+  names(out) <- c("tick", "type", "channel", "param1", "param2")
   types <- midi_event_types()
   out$type <- factor(out$type, levels = c(types), labels = names(types))
   data.frame(out)
