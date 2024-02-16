@@ -14,4 +14,5 @@ SystemRequirements: fluidsynth: fluidsynth-devel (rpm) or libfluidsynth-dev (deb
     Linux you also need a soundfont provided by 'fluid-soundfont-gm' (Fedora) or 
     'sf3-soundfont-gm' (Debian/Ubuntu)
 URL: https://docs.ropensci.org/fluidsynth/
+    https://ropensci.r-universe.dev/fluidsynth
 BugReports: https://github.com/ropensci/fluidsynth/issues
