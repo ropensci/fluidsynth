@@ -22,7 +22,7 @@ midi_convert(
   verbose = interactive()
 )
 
-midi_read(midi = demo_midi(), verbose = interactive())
+midi_read(midi = demo_midi(), verbose = FALSE)
 }
 \arguments{
 \item{midi}{path to the midi file}

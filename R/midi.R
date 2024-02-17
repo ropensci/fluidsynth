@@ -53,7 +53,7 @@ midi_convert <- function(midi = demo_midi(), soundfont = soundfont_path(), outpu
 #' @export
 #' @rdname fluidsynth
 #' @useDynLib fluidsynth C_midi_read
-midi_read <- function(midi = demo_midi(), verbose = interactive()){
+midi_read <- function(midi = demo_midi(), verbose = FALSE){
   midi <- normalizePath(midi, mustWork = TRUE)
   verbose <- as.logical(verbose)
   out <- .Call(C_midi_read, midi, verbose)
