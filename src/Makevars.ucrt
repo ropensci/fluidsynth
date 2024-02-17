@@ -1,0 +1,9 @@
+# Used on rtools43 and up
+PKG_LIBS = $(shell pkg-config --libs fluidsynth)
+PKG_CFLAGS = -DFLUIDSYNTH_NOT_A_DLL
+
+# Fallback for older rtools without fluidsynth
+ifeq (,$(PKG_LIBS))
+  include Makevars.win
+endif
+
