@@ -42,7 +42,7 @@ fluidsynth_setting_default <- function(setting){
 #' @export
 #' @rdname fluidsynth_settings
 #' @useDynLib fluidsynth C_fluidsynth_version
-fluidsynth_version <- function(){
+libfluidsynth_version <- function(){
   .Call(C_fluidsynth_version)
 }
 

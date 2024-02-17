@@ -5,7 +5,7 @@
 \alias{fluidsynth_setting_list}
 \alias{fluidsynth_setting_options}
 \alias{fluidsynth_setting_default}
-\alias{fluidsynth_version}
+\alias{libfluidsynth_version}
 \title{Fluidsynth settings}
 \usage{
 fluidsynth_setting_list()
@@ -14,7 +14,7 @@ fluidsynth_setting_options(setting)
 
 fluidsynth_setting_default(setting)
 
-fluidsynth_version()
+libfluidsynth_version()
 }
 \arguments{
 \item{setting}{string with one of the options listed in \code{\link[=fluidsynth_setting_list]{fluidsynth_setting_list()}}, see examples.}
