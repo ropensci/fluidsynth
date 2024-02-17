@@ -1,28 +1,29 @@
 #' Play or convert a midi file
 #'
-#' Renders a midi file to your audio device or to a wav file. Additional settings
-#' can be specified, see [fluidsynth_setting_list] for availble options.
-#' On Linux you may need to specify an `audio.driver` that works for your hardware.
+#' Play a midi file to your audio device, render it to a file, or parse the raw data.
+#' Additional settings can be specified, see [fluidsynth_setting_list] for available
+#' options.
 #'
 #' The `midi_convert` function internally uses fluidsynth to generate a raw wav file,
 #' and then [av::av_audio_convert()] to convert into the requested about format. See
 #' [av::av_muxers()] for supported output formats and their corresponding file extension.
 #'
-#' You need a soundfont to play midi.
-#' A free soundfont called [GeneralUser-GS](https://www.schristiancollins.com/generaluser.php) is
-#' included with this package.
+#' You need a soundfont to synthesize midi, see the [soundfonts] page. On Linux you may
+#' also need to specify an `audio.driver` that works for your hardware, although on
+#' recent distributions the defaults generally work.
 #'
 #' @useDynLib fluidsynth C_midi_play
 #' @export
 #' @rdname fluidsynth
+#' @family fluidsynth
+#' @returns midi_read returns data frame with midi events.
 #' @param midi path to the midi file
 #' @param soundfont path to the soundfont
 #' @param settings a named vector with additional settings from [fluidsynth_setting_list()]
 #' @param audio.driver which audio driver to use,
 #' see [fluidsynth docs](https://www.fluidsynth.org/api/CreatingAudioDriver.html)
 #' @examples
-#' midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.mp3')
-#' unlink("lowquality.mp3")
+#' df <- midi_read(demo_midi())
 midi_play <- function(midi = demo_midi(), soundfont = soundfont_path(), audio.driver = NULL,
                       settings = list(), verbose = interactive()){
   midi <- normalizePath(midi, mustWork = TRUE)
@@ -62,6 +63,8 @@ midi_read <- function(midi = demo_midi(), verbose = FALSE){
   data.frame(out)
 }
 
+#' @export
+#' @rdname fluidsynth
 demo_midi <- function(){
   list.files(system.file(package = 'fluidsynth', 'midi'), pattern = '\\.mid$', full.names = TRUE)
 }

@@ -13,6 +13,9 @@ download_generaluser_gs()
 \arguments{
 \item{download}{automatically download soundfont if none exists.}
 }
+\value{
+the path to a local soundfont to synthesize a midi file.
+}
 \description{
 FluidSynth requires a soundfont to synthesize a midi. On Linux distributions
 some soundfounds are often preinstalled, though their quality varies. If your
@@ -23,3 +26,9 @@ midi sounds very poor, try seleting another soundfont.
 is a nice free soundfont. The \code{download_generaluser_gs()} function will
 automatically download a copy to that will be picked up by this package.
 }
+\seealso{
+Other fluidsynth: 
+\code{\link{fluidsynth_settings}},
+\code{\link{midi_play}()}
+}
+\concept{fluidsynth}

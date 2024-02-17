@@ -7,6 +7,8 @@
 #' @export
 #' @name fluidsynth_settings
 #' @rdname fluidsynth_settings
+#' @family fluidsynth
+#' @returns a list with available options
 #' @useDynLib fluidsynth C_fluidsynth_list_settings
 #' @references [FluidSynth Settings Reference](https://www.fluidsynth.org/api/fluidsettings.html)
 #' @examples

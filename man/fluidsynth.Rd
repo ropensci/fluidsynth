@@ -4,6 +4,7 @@
 \alias{midi_play}
 \alias{midi_convert}
 \alias{midi_read}
+\alias{demo_midi}
 \title{Play or convert a midi file}
 \usage{
 midi_play(
@@ -23,6 +24,8 @@ midi_convert(
 )
 
 midi_read(midi = demo_midi(), verbose = FALSE)
+
+demo_midi()
 }
 \arguments{
 \item{midi}{path to the midi file}
@@ -38,21 +41,29 @@ see \href{https://www.fluidsynth.org/api/CreatingAudioDriver.html}{fluidsynth do
 
 \item{output}{filename of the output. The out}
 }
+\value{
+midi_read returns data frame with midi events.
+}
 \description{
-Renders a midi file to your audio device or to a wav file. Additional settings
-can be specified, see \link{fluidsynth_setting_list} for availble options.
-On Linux you may need to specify an \code{audio.driver} that works for your hardware.
+Play a midi file to your audio device, render it to a file, or parse the raw data.
+Additional settings can be specified, see \link{fluidsynth_setting_list} for available
+options.
 }
 \details{
 The \code{midi_convert} function internally uses fluidsynth to generate a raw wav file,
 and then \code{\link[av:encoding]{av::av_audio_convert()}} to convert into the requested about format. See
 \code{\link[av:formats]{av::av_muxers()}} for supported output formats and their corresponding file extension.
 
-You need a soundfont to play midi.
-A free soundfont called \href{https://www.schristiancollins.com/generaluser.php}{GeneralUser-GS} is
-included with this package.
+You need a soundfont to synthesize midi, see the \link{soundfonts} page. On Linux you may
+also need to specify an \code{audio.driver} that works for your hardware, although on
+recent distributions the defaults generally work.
 }
 \examples{
-midi_convert(settings = list('synth.sample-rate'= 22050), output =  'lowquality.mp3')
-unlink("lowquality.mp3")
+df <- midi_read(demo_midi())
 }
+\seealso{
+Other fluidsynth: 
+\code{\link{fluidsynth_settings}},
+\code{\link{soundfonts}}
+}
+\concept{fluidsynth}

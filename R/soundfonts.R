@@ -11,6 +11,8 @@
 #' @export
 #' @name soundfonts
 #' @rdname soundfonts
+#' @family fluidsynth
+#' @returns the path to a local soundfont to synthesize a midi file.
 #' @param download automatically download soundfont if none exists.
 soundfont_path <- function(download = TRUE){
   if(file.exists(generaluser_gs_path())){

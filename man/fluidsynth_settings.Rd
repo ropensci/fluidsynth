@@ -16,6 +16,9 @@ fluidsynth_setting_default(setting)
 \arguments{
 \item{setting}{string with one of the options listed in \code{\link[=fluidsynth_setting_list]{fluidsynth_setting_list()}}, see examples.}
 }
+\value{
+a list with available options
+}
 \description{
 Get available settings and their types.
 See \href{https://www.fluidsynth.org/api/fluidsettings.html}{fluidsynth docs}
@@ -30,3 +33,9 @@ fluidsynth_setting_default('synth.sample-rate')
 \references{
 \href{https://www.fluidsynth.org/api/fluidsettings.html}{FluidSynth Settings Reference}
 }
+\seealso{
+Other fluidsynth: 
+\code{\link{midi_play}()},
+\code{\link{soundfonts}}
+}
+\concept{fluidsynth}
