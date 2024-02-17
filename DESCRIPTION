@@ -1,10 +1,13 @@
 Package: fluidsynth
 Type: Package
-Title: Read and Play MIDI files in R
+Title: Read and Play Digital Music (MIDI) in R
 Version: 1.0.0
-Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
-      comment = c(ORCID = "0000-0002-4035-0289"))
-Description: Bindings to libfluidsynth to parse and synthesize midi files.
+Authors@R: c(
+    person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
+      comment = c(ORCID = "0000-0002-4035-0289")),
+    person("S. Christian Collins", role = "cph", comment = "author of generaluser-gs 
+      soundbank"))
+Description: Bindings to 'libfluidsynth' to parse and synthesize midi files.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
