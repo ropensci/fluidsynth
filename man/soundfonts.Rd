@@ -3,12 +3,12 @@
 \name{soundfonts}
 \alias{soundfonts}
 \alias{soundfont_path}
-\alias{download_generaluser_gs}
+\alias{soundfont_download}
 \title{Managing soundfonts}
 \usage{
 soundfont_path(download = TRUE)
 
-download_generaluser_gs()
+soundfont_download()
 }
 \arguments{
 \item{download}{automatically download soundfont if none exists.}
@@ -18,13 +18,13 @@ the path to a local soundfont to synthesize a midi file.
 }
 \description{
 FluidSynth requires a soundfont to synthesize a midi. On Linux distributions
-some soundfounds are often preinstalled, though their quality varies. If your
-midi sounds very poor, try seleting another soundfont.
+some soundfonts are often preinstalled, though their quality varies. If your
+midi sounds very poor, try using another soundfont.
 }
 \details{
-\href{https://schristiancollins.com/generaluser}{GenralUser-GS} by S. Christian Collins
-is a nice free soundfont. The \code{download_generaluser_gs()} function will
-automatically download a copy to that will be picked up by this package.
+\href{https://schristiancollins.com/generaluser}{GeneralUser-GS} by S. Christian Collins
+is a nice free soundfont. You can use \code{soundfont_download()} to install a copy
+of this soundbank for use by this package.
 }
 \seealso{
 Other fluidsynth: 

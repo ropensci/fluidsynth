@@ -1,12 +1,12 @@
 #' Managing soundfonts
 #'
 #' FluidSynth requires a soundfont to synthesize a midi. On Linux distributions
-#' some soundfounds are often preinstalled, though their quality varies. If your
-#' midi sounds very poor, try seleting another soundfont.
+#' some soundfonts are often preinstalled, though their quality varies. If your
+#' midi sounds very poor, try using another soundfont.
 #'
-#' [GenralUser-GS](https://schristiancollins.com/generaluser) by S. Christian Collins
-#' is a nice free soundfont. The `download_generaluser_gs()` function will
-#' automatically download a copy to that will be picked up by this package.
+#' [GeneralUser-GS](https://schristiancollins.com/generaluser) by S. Christian Collins
+#' is a nice free soundfont. You can use `soundfont_download()` to install a copy
+#' of this soundbank for use by this package.
 #'
 #' @export
 #' @name soundfonts
@@ -25,12 +25,12 @@ soundfont_path <- function(download = TRUE){
   if(grepl('redhat-linux', R.version$platform)){
     stop('No soundfont found. Install one using either "yum install fluid-soundfont-gm" or in R: download_generaluser_gs()')
   }
-  download_generaluser_gs()
+  soundfont_download()
 }
 
 #' @export
 #' @rdname soundfonts
-download_generaluser_gs <- function(){
+soundfont_download <- function(){
   path <- generaluser_gs_path()
   if(!file.exists(path)){
     url <- 'https://github.com/ropensci/fluidsynth/releases/download/generaluser-gs-v1.471/generaluser-gs-v1.471.zip'
