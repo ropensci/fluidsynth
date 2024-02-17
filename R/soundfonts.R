@@ -23,7 +23,7 @@ soundfont_path <- function(download = TRUE){
     return(default)
   }
   if(grepl('redhat-linux', R.version$platform)){
-    stop('No soundfont found. Install one using either "yum install fluid-soundfont-gm" or in R: download_generaluser_gs()')
+    stop('No soundfont found. Install one using either "yum install fluid-soundfont-gm" or in R: soundfont_download()')
   }
   soundfont_download()
 }
