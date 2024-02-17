@@ -10,7 +10,7 @@ static int pending_interrupt(void) {
   return !(R_ToplevelExec(check_interrupt_fn, NULL));
 }
 
-static size_t event_count = 0;
+static int event_count = 0;
 static fluid_player_t* global_player = NULL;
 static int event_callback(void *data, fluid_midi_event_t *event){
   if(data){
@@ -28,7 +28,7 @@ static int event_callback(void *data, fluid_midi_event_t *event){
   return FLUID_OK;
 }
 
-SEXP C_midi_data(SEXP midi, SEXP progress){
+SEXP C_midi_read(SEXP midi, SEXP progress){
   const char *midi_file = CHAR(Rf_asChar(midi));
   if(!fluid_is_midifile(midi_file))
     Rf_error("File is not a midi: %s ", midi_file);
