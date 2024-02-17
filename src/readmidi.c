@@ -59,6 +59,15 @@ SEXP C_midi_read(SEXP midi, SEXP progress){
 
   /* Restart play again */
   event_count = 0;
+  fluid_player_join(player);
+
+  /* Workaround for hang in Ubuntu 20.04: reset player */
+#if FLUIDSYNTH_VERSION_MAJOR == 2 && FLUIDSYNTH_VERSION_MINOR < 2
+  delete_fluid_player(player);
+  player = new_fluid_player(synth);
+  fluid_player_add(player, midi_file);
+#endif
+
   fluid_player_set_playback_callback(player, event_callback, df);
   global_player = player;
   fluid_player_play(player);
@@ -68,7 +77,7 @@ SEXP C_midi_read(SEXP midi, SEXP progress){
     if(pending_interrupt())
       fluid_player_stop(player);
     if(Rf_asLogical(progress))
-      REprintf("\rStoring MIDI events: %d", event_count);
+      REprintf("\rStoring MIDI events: %d  ", event_count);
   }
 
   /* wait for playback termination */
