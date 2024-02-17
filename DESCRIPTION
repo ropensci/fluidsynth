@@ -1,10 +1,10 @@
 Package: fluidsynth
 Type: Package
-Title: Play and Render MIDI files in R
-Version: 0.1.0
+Title: Read and Play MIDI files in R
+Version: 1.0.0
 Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
       comment = c(ORCID = "0000-0002-4035-0289"))
-Description: Bindings to libfluidsynth to synthesize midi files.
+Description: Bindings to libfluidsynth to parse and synthesize midi files.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
