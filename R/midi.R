@@ -62,6 +62,10 @@ midi_read <- function(midi = demo_midi(), verbose = FALSE){
   data.frame(out)
 }
 
+demo_midi <- function(){
+  list.files(system.file(package = 'fluidsynth', 'midi'), pattern = '\\.mid$', full.names = TRUE)
+}
+
 # Values from: https://github.com/FluidSynth/fluidsynth/blob/master/src/midi/fluid_midi.h#L46C1-L71C27
 midi_events <- c(
   NOTE_OFF = 0x80,
@@ -86,4 +90,3 @@ midi_events <- c(
   MIDI_SYSTEM_RESET = 0xff,
   MIDI_META_EVENT = 0xff
 )
-

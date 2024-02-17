@@ -34,7 +34,7 @@ download_generaluser_gs <- function(){
     url <- 'https://github.com/ropensci/fluidsynth/releases/download/generaluser-gs-v1.471/generaluser-gs-v1.471.zip'
     if(getOption('timeout') < 300) options(timeout = 300)
     on.exit(unlink('generaluser-gs-v1.471.zip'))
-    utils::download.file(url, 'generaluser-gs-v1.471.zip')
+    utils::download.file(url, 'generaluser-gs-v1.471.zip', quiet = TRUE)
     dir.create(dirname(path), showWarnings = FALSE)
     utils::unzip('generaluser-gs-v1.471.zip', exdir = dirname(path))
   }
@@ -42,9 +42,5 @@ download_generaluser_gs <- function(){
 }
 
 generaluser_gs_path <- function(){
-  file.path(system.file(package = 'fluidsynth'), 'generaluser-gs/v1.471.sf2')
-}
-
-demo_midi <- function(){
-  list.files(system.file(package = 'fluidsynth', 'generaluser-gs/midi'), full.names = TRUE)
+  file.path(rappdirs::user_data_dir('soundfonts'), 'generaluser-gs/v1.471.sf2')
 }
