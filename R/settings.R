@@ -39,6 +39,13 @@ fluidsynth_setting_default <- function(setting){
   .Call(C_fluidsynth_get_default, setting)
 }
 
+#' @export
+#' @rdname fluidsynth_settings
+#' @useDynLib fluidsynth C_fluidsynth_version
+fluidsynth_version <- function(){
+  .Call(C_fluidsynth_version)
+}
+
 validate_fluidsynth_settings <- function(opts){
   if(length(opts)){
     settings <- fluidsynth_setting_list()

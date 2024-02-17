@@ -87,3 +87,7 @@ SEXP C_fluidsynth_get_default(SEXP setting){
   delete_fluid_settings(settings);
   return out;
 }
+
+SEXP C_fluidsynth_version(void){
+  return Rf_mkString(fluid_version_str());
+}
