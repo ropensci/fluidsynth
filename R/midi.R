@@ -58,34 +58,32 @@ midi_read <- function(midi = demo_midi(), verbose = FALSE){
   verbose <- as.logical(verbose)
   out <- .Call(C_midi_read, midi, verbose)
   names(out) <- c("tick", "type", "channel", "param1", "param2")
-  types <- midi_event_types()
-  out$type <- factor(out$type, levels = c(types), labels = names(types))
+  out$type <- factor(out$type, levels = c(midi_events), labels = names(midi_events))
   data.frame(out)
 }
 
 # Values from: https://github.com/FluidSynth/fluidsynth/blob/master/src/midi/fluid_midi.h#L46C1-L71C27
-midi_event_types <- function(){
-  c(
-    NOTE_OFF = 0x80,
-    NOTE_ON = 0x90,
-    KEY_PRESSURE = 0xa0,
-    CONTROL_CHANGE = 0xb0,
-    PROGRAM_CHANGE = 0xc0,
-    CHANNEL_PRESSURE = 0xd0,
-    PITCH_BEND = 0xe0,
-    MIDI_SYSEX = 0xf0,
-    MIDI_TIME_CODE = 0xf1,
-    MIDI_SONG_POSITION = 0xf2,
-    MIDI_SONG_SELECT = 0xf3,
-    MIDI_TUNE_REQUEST = 0xf6,
-    MIDI_EOX = 0xf7,
-    MIDI_SYNC = 0xf8,
-    MIDI_TICK = 0xf9,
-    MIDI_START = 0xfa,
-    MIDI_CONTINUE = 0xfb,
-    MIDI_STOP = 0xfc,
-    MIDI_ACTIVE_SENSING = 0xfe,
-    MIDI_SYSTEM_RESET = 0xff,
-    MIDI_META_EVENT = 0xff
-  )
-}
+midi_events <- c(
+  NOTE_OFF = 0x80,
+  NOTE_ON = 0x90,
+  KEY_PRESSURE = 0xa0,
+  CONTROL_CHANGE = 0xb0,
+  PROGRAM_CHANGE = 0xc0,
+  CHANNEL_PRESSURE = 0xd0,
+  PITCH_BEND = 0xe0,
+  MIDI_SYSEX = 0xf0,
+  MIDI_TIME_CODE = 0xf1,
+  MIDI_SONG_POSITION = 0xf2,
+  MIDI_SONG_SELECT = 0xf3,
+  MIDI_TUNE_REQUEST = 0xf6,
+  MIDI_EOX = 0xf7,
+  MIDI_SYNC = 0xf8,
+  MIDI_TICK = 0xf9,
+  MIDI_START = 0xfa,
+  MIDI_CONTINUE = 0xfb,
+  MIDI_STOP = 0xfc,
+  MIDI_ACTIVE_SENSING = 0xfe,
+  MIDI_SYSTEM_RESET = 0xff,
+  MIDI_META_EVENT = 0xff
+)
+
