@@ -6,7 +6,7 @@
 \alias{soundfont_download}
 \title{Managing soundfonts}
 \usage{
-soundfont_path(download = TRUE)
+soundfont_path(download = FALSE)
 
 soundfont_download()
 }
