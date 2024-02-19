@@ -18,8 +18,8 @@ static int event_callback(void *data, fluid_midi_event_t *event){
     //fluid_event_from_midi_event(evt, event);
     SEXP df = data;
     INTEGER(VECTOR_ELT(df, 0))[event_count] = fluid_player_get_current_tick(global_player);
-    INTEGER(VECTOR_ELT(df, 1))[event_count] = fluid_midi_event_get_type(event);
-    INTEGER(VECTOR_ELT(df, 2))[event_count] = fluid_midi_event_get_channel(event);
+    INTEGER(VECTOR_ELT(df, 1))[event_count] = fluid_midi_event_get_channel(event);
+    INTEGER(VECTOR_ELT(df, 2))[event_count] = fluid_midi_event_get_type(event);
     INTEGER(VECTOR_ELT(df, 3))[event_count] = fluid_midi_event_get_key(event);
     INTEGER(VECTOR_ELT(df, 4))[event_count] = fluid_midi_event_get_value(event);
     //delete_fluid_event(evt);
