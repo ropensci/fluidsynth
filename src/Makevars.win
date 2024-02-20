@@ -1,5 +1,5 @@
 RWINLIB = ../windows/fluidsynth
-PKG_CPPFLAGS = -I$(RWINLIB)/include -DFLUIDSYNTH_NOT_A_DLL
+PKG_CPPFLAGS = -I$(RWINLIB)/include -DFLUIDSYNTH_NOT_A_DLL -DR_NO_REMAP -DSTRICT_R_HEADERS
 PKG_LIBS = -L$(RWINLIB)/lib -lfluidsynth -ldsound -lksuser \
 	-lgmodule-2.0 -lglib-2.0 -lws2_32 -lintl -liconv  -lsndfile -lmp3lame -lflac \
 	-lvorbisenc -lvorbis -logg -lopus -lmpg123 -lshlwapi -lportaudio \

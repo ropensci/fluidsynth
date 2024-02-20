@@ -1,6 +1,6 @@
 # Used on rtools43 and up
 PKG_LIBS = $(shell pkg-config --libs fluidsynth)
-PKG_CFLAGS = -DFLUIDSYNTH_NOT_A_DLL
+PKG_CFLAGS = -DFLUIDSYNTH_NOT_A_DLL -DR_NO_REMAP -DSTRICT_R_HEADERS
 
 # Fallback for older rtools without fluidsynth
 ifeq (,$(PKG_LIBS))
