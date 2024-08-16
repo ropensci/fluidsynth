@@ -1,5 +1,6 @@
-# Used on rtools43 and up
-PKG_LIBS = $(shell pkg-config --libs fluidsynth)
+# Used on rtools43 and up.
+# Remove illegal '-mwindows flag from libs (bug in rtools)
+PKG_LIBS = $(subst -mwindows,,$(shell pkg-config --libs fluidsynth))
 PKG_CFLAGS = -DFLUIDSYNTH_NOT_A_DLL -DR_NO_REMAP -DSTRICT_R_HEADERS
 
 # Fallback for older rtools without fluidsynth
