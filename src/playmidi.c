@@ -24,7 +24,7 @@ static void set_user_settings(fluid_settings_t* settings, SEXP userset){
       fluid_settings_setint(settings, optname, (int) REAL(val)[0]);
       break;
     case FLUID_STR_TYPE:
-      fluid_settings_setstr(settings, optname, CHAR(Rf_asChar(val)));
+      fluid_settings_setstr(settings, optname, CHAR(STRING_ELT(val, 0)));
       break;
     }
   }
