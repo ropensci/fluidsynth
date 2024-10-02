@@ -1,7 +1,7 @@
 Package: fluidsynth
 Type: Package
 Title: Read and Play Digital Music (MIDI)
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
     person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroenooms@gmail.com",
       comment = c(ORCID = "0000-0002-4035-0289")),
