@@ -11,3 +11,4 @@ configure.log
 *.wav
 *.mp3
 
+libfluidsynth*.deb
