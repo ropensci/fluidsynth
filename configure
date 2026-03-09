@@ -77,6 +77,12 @@ case "$PKG_CFLAGS" in
   ;;
 esac
 
+# Check if GLib headers are available (fluidsynth depends on GLib on Linux/Mac)
+echo "#include <glib.h>" | ${CC} ${CPPFLAGS} ${PKG_CFLAGS} ${CFLAGS} -E -xc - >/dev/null 2>&1
+if [ $? -eq 0 ]; then
+  PKG_CFLAGS="$PKG_CFLAGS -DHAVE_GLIB"
+fi
+
 # Write to Makevars
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 
