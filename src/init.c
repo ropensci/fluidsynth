@@ -25,7 +25,9 @@ static const R_CallMethodDef CallEntries[] = {
 };
 
 static void logging_callback(int level, const char *message, void *data){
-  REprintf("[FluidSynth] %s\n", message);
+  if(level <= FLUID_ERR){
+    REprintf("[FluidSynth] %s\n", message);
+  }
 }
 
 void R_init_fluidsynth(DllInfo *dll){
@@ -38,4 +40,5 @@ void R_init_fluidsynth(DllInfo *dll){
   fluid_set_log_function(FLUID_ERR, logging_callback, NULL);
   fluid_set_log_function(FLUID_WARN, logging_callback, NULL);
   fluid_set_log_function(FLUID_INFO, logging_callback, NULL);
+  fluid_set_log_function(FLUID_DBG, logging_callback, NULL);
 }
