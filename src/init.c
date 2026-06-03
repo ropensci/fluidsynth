@@ -5,6 +5,10 @@
 #ifdef HAS_LIBSDL2
 #include <SDL2/SDL.h>
 #endif
+#ifdef HAS_LIBSDL3
+#include <dlfcn.h>
+#define SDL_INIT_AUDIO 0x00000010u
+#endif
 
 /* .Call calls */
 extern SEXP C_fluidsynth_list_settings(void);
@@ -31,6 +35,14 @@ static void logging_callback(int level, const char *message, void *data){
 void R_init_fluidsynth(DllInfo *dll){
 #ifdef HAS_LIBSDL2
    SDL_Init(SDL_INIT_AUDIO);
+#endif
+#ifdef HAS_LIBSDL3
+  /* SDL3 requires SDL_Init(SDL_INIT_AUDIO) to be called by the application.
+   * Since fluidsynth already links to libSDL3, the symbol is available via
+   * RTLD_DEFAULT without needing SDL3 headers. */
+  typedef int (*sdl_init_fn)(unsigned int);
+  sdl_init_fn sdl_init_func = (sdl_init_fn) dlsym(RTLD_DEFAULT, "SDL_Init");
+  if(sdl_init_func) sdl_init_func(SDL_INIT_AUDIO);
 #endif
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);

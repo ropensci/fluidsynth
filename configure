@@ -75,6 +75,10 @@ case "$PKG_CFLAGS" in
     PKG_CFLAGS="$PKG_CFLAGS -DHAS_LIBSDL2"
     PKG_LIBS="$PKG_LIBS -lSDL2"
   ;;
+  *SDL3*)
+    PKG_CFLAGS="$PKG_CFLAGS -DHAS_LIBSDL3"
+    PKG_LIBS="$PKG_LIBS -ldl"
+  ;;
 esac
 
 # Write to Makevars
