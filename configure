@@ -77,6 +77,12 @@ case "$PKG_CFLAGS" in
   ;;
 esac
 
+# SDL3 is harder to detect
+if pkgconf --print-requires-private fluidsynth | grep sdl3; then
+  PKG_CFLAGS="$PKG_CFLAGS -DHAS_LIBSDL3"
+  PKG_LIBS="$PKG_LIBS -lSDL3"
+fi
+
 # Write to Makevars
 sed -e "s|@cflags@|$PKG_CFLAGS|" -e "s|@libs@|$PKG_LIBS|" src/Makevars.in > src/Makevars
 

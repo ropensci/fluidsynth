@@ -5,6 +5,9 @@
 #ifdef HAS_LIBSDL2
 #include <SDL2/SDL.h>
 #endif
+#ifdef HAS_LIBSDL3
+#include <SDL3/SDL.h>
+#endif
 
 /* .Call calls */
 extern SEXP C_fluidsynth_list_settings(void);
@@ -29,7 +32,7 @@ static void logging_callback(int level, const char *message, void *data){
 }
 
 void R_init_fluidsynth(DllInfo *dll){
-#ifdef HAS_LIBSDL2
+#if defined(HAS_LIBSDL2) || defined(HAS_LIBSDL3)
    SDL_Init(SDL_INIT_AUDIO);
 #endif
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
