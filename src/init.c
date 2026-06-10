@@ -1,6 +1,7 @@
 #include <fluidsynth.h>
 #include <Rinternals.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <R_ext/Rdynload.h>
 #ifdef HAS_LIBSDL2
 #include <SDL2/SDL.h>
@@ -33,7 +34,11 @@ static void logging_callback(int level, const char *message, void *data){
 
 void R_init_fluidsynth(DllInfo *dll){
 #if defined(HAS_LIBSDL2) || defined(HAS_LIBSDL3)
-   SDL_Init(SDL_INIT_AUDIO);
+  if (geteuid() == 0) {
+    REprintf("Running fluidsynth as root is known to cause issues audio playback");
+  } else {
+    SDL_Init(SDL_INIT_AUDIO);
+  }
 #endif
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
