@@ -34,11 +34,8 @@ static void logging_callback(int level, const char *message, void *data){
 
 void R_init_fluidsynth(DllInfo *dll){
 #if defined(HAS_LIBSDL2) || defined(HAS_LIBSDL3)
-  if (geteuid() == 0) {
-    REprintf("Running fluidsynth as root is known to cause issues audio playback");
-  } else {
-    SDL_Init(SDL_INIT_AUDIO);
-  }
+  setenv("PIPEWIRE_DEBUG", "0", 0);
+  SDL_Init(SDL_INIT_AUDIO);
 #endif
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
   R_useDynamicSymbols(dll, FALSE);
