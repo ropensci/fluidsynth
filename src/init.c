@@ -37,6 +37,8 @@ void R_init_fluidsynth(DllInfo *dll){
   if (geteuid() == 0) {
     REprintf("Running fluidsynth as root is known to cause issues audio playback");
   } else {
+    //pipewire emits a lot of noise when it can't read the HOME dir
+    setenv("PIPEWIRE_DEBUG", "0", 0);
     SDL_Init(SDL_INIT_AUDIO);
   }
 #endif
